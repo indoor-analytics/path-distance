@@ -2,6 +2,7 @@ import { expect } from "chai";
 import {path1, path2} from "./test.features";
 import {pathDistance} from "../src/distance/distance";
 import {lineString} from "@turf/helpers";
+import {lineDistance} from "@turf/turf";
 
 describe ('distance', () => {
     it ('should return some vectors', () => {
@@ -53,5 +54,13 @@ describe ('distance', () => {
         const firstVector = vectors[0];
         expect(firstVector.projectedDistance).to.equal(0);
         expect(firstVector.projectedPoint).to.deep.equal(path1.geometry!.coordinates[0]);
+    });
+
+    it ('should return last vector mapped on last path position', () => {
+        const vectors = pathDistance(path1, path2);
+        const lastVector = vectors[vectors.length-1];
+
+        expect(lastVector.projectedDistance).to.equal(lineDistance(path1));
+        expect(lastVector.projectedPoint).to.deep.equal(path1.geometry!.coordinates[path1.geometry!.coordinates.length-1]);
     });
 });
