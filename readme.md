@@ -8,6 +8,23 @@ This allows to compare paths with different location counts.
 |:--:|
 | *comparing two paths* |
 
+## How to use
+
+Add this line to `~/.npmrc` to set up the package registry: 
+```shell
+@indoor-analytics:registry=https://npm.pkg.github.com/indoor-analytics
+```
+
+In your project, install the package:
+```shell
+npm i --save @indoor-analytics/path-distance
+```
+
+Import the function in your code:
+```javascript
+import {pathDistance} from '@indoor-analytics/path-distance';
+```
+
 ## Distance algorithm formalization
 
 For each acquired path location, we create a projection on the reference path; first path location
