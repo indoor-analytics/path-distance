@@ -76,4 +76,15 @@ describe ('distance', () => {
             distance = currentDistance;
         }
     });
+
+
+    it ('should return as many vectors as acquired path locations count (1)', () => {
+        const vectors = pathDistance(path2, path1);
+        expect(vectors.length).to.equal(path1.geometry!.coordinates.length);
+    });
+
+    it ('should return as many vectors as acquired path locations count (2)', () => {
+        const vectors = pathDistance(path1, path2);
+        expect(vectors.length).to.equal(path2.geometry!.coordinates.length);
+    });
 });
