@@ -1,0 +1,9 @@
+# ignore the .ts (source) files
+*.ts
+# include the .d.ts (types) files
+!*.d.ts
+
+.idea
+tsconfig.json
+node.geojson
+test
