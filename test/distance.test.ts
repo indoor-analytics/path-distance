@@ -47,4 +47,11 @@ describe ('distance', () => {
             expect(vector.acquiredPoint).to.deep.equal(vector.projectedPoint);
         }
     });
+
+    it ('should return first vector mapped on first path position', () => {
+        const vectors = pathDistance(path1, path2);
+        const firstVector = vectors[0];
+        expect(firstVector.projectedDistance).to.equal(0);
+        expect(firstVector.projectedPoint).to.deep.equal(path1.geometry!.coordinates[0]);
+    });
 });
