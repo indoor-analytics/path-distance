@@ -1,5 +1,6 @@
 import {Feature, LineString} from "@turf/helpers";
 import ErrorVector from "./ErrorVector";
+import {lineDistance} from "@turf/turf";
 
 /**
  * Compares a path to a reference path by projecting its positions on the reference path.
@@ -14,3 +15,18 @@ export function pathDistance (
 ): ErrorVector[] {
     return [];
 }
+
+
+/**
+ * Returns distance delta between two paths.
+ *
+ * @param referencePath
+ * @param acquiredPath
+ */
+function getLineDistanceDelta (
+    referencePath: Feature<LineString>,
+    acquiredPath: Feature<LineString>
+): number {
+    return lineDistance(referencePath) / lineDistance(acquiredPath);
+}
+
