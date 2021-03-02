@@ -19,6 +19,7 @@ describe ('distance', () => {
         }
     });
 
+
     it ('should throw with first path being empty', () => {
         expect(() => {
             pathDistance(lineString([]), path2);
@@ -35,5 +36,15 @@ describe ('distance', () => {
         expect(() => {
             pathDistance(lineString([]), lineString([]));
         }).to.throw(Error, 'coordinates must be an array of two or more positions');
+    });
+
+
+    it ('should return vectors with a 0-distance while comparing a path with itself', () => {
+        const vectors = pathDistance(path1, path1);
+
+        for (const vector of vectors) {
+            expect(vector.distance).to.equal(0);
+            expect(vector.acquiredPoint).to.deep.equal(vector.projectedPoint);
+        }
     });
 });
