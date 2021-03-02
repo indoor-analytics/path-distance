@@ -1,6 +1,6 @@
-import {Feature, LineString, Point} from "@turf/helpers";
+import {Feature, LineString, Point, point} from "@turf/helpers";
 import ErrorVector from "./ErrorVector";
-import {distance, lineDistance} from "@turf/turf";
+import {along, distance, lineDistance} from "@turf/turf";
 
 /**
  * Compares a path to a reference path by projecting its positions on the reference path.
@@ -13,7 +13,45 @@ export function pathDistance (
     referencePath: Feature<LineString>,
     comparedPath: Feature<LineString>
 ): ErrorVector[] {
-    return [];
+
+    const vectors: ErrorVector[] = [];
+    let index = 0;
+    const delta = getLineDistanceDelta(referencePath, comparedPath);
+    const acquiredCoordinates = comparedPath.geometry!.coordinates;
+
+    // origin
+    const startPoint = acquiredCoordinates[0];
+    const projectedStartPoint = referencePath.geometry!.coordinates[0];
+    vectors.push(
+        createVectorFrom(point(startPoint), point(projectedStartPoint), index, 0)
+    );
+
+    let coveredDistance: number = 0;
+    const length = acquiredCoordinates.length-1;
+    // run over all coordinates until last one
+    for (let i=1, len=length; i<len; i++) {
+        const currentPoint = acquiredCoordinates[i] as any;
+        const previousPoint = acquiredCoordinates[i-1] as any;
+
+        // adding distance
+        coveredDistance += distance( currentPoint, previousPoint, {units: 'meters'} );
+
+        // projection of the point on the reference path
+        const interpolationDistance = coveredDistance*delta;
+        const newPoint = along(referencePath, interpolationDistance);
+        vectors.push(
+            createVectorFrom(point(currentPoint), newPoint, i, interpolationDistance)
+        );
+    }
+
+    // last one
+    const endPoint = acquiredCoordinates[acquiredCoordinates.length-1];
+    const projectedEndPoint = referencePath.geometry!.coordinates[referencePath.geometry!.coordinates.length-1];
+    vectors.push(
+        createVectorFrom(point(endPoint), point(projectedEndPoint), length, lineDistance(referencePath, {units: 'meters'}))
+    );
+
+    return vectors;
 }
 
 
