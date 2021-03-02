@@ -3,6 +3,7 @@ import {path1, path2} from "./test.features";
 import {pathDistance} from "../src/distance/distance";
 import {lineString} from "@turf/helpers";
 import {lineDistance} from "@turf/turf";
+import assert = require("assert");
 
 describe ('distance', () => {
     it ('should return some vectors', () => {
@@ -62,5 +63,17 @@ describe ('distance', () => {
 
         expect(lastVector.projectedDistance).to.equal(lineDistance(path1));
         expect(lastVector.projectedPoint).to.deep.equal(path1.geometry!.coordinates[path1.geometry!.coordinates.length-1]);
+    });
+
+    it ('should return vectors whose projectedDistance values increase', () => {
+        const vectors = pathDistance(path1, path2);
+        let distance = 0;
+
+        for (const vector of vectors) {
+            const currentDistance = vector.projectedDistance;
+            if (currentDistance < distance)
+                assert.fail("One vector's projected distance is inferior to previous vector's.");
+            distance = currentDistance;
+        }
     });
 });
