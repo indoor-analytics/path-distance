@@ -41,15 +41,6 @@ describe ('distance', () => {
     });
 
 
-    it ('should return vectors with a 0-distance while comparing a path with itself', () => {
-        const vectors = pathDistance(path1, path1);
-
-        for (const vector of vectors) {
-            expect(vector.distance).to.equal(0);
-            expect(vector.acquiredPoint).to.deep.equal(vector.projectedPoint);
-        }
-    });
-
     it ('should return first vector mapped on first path position', () => {
         const vectors = pathDistance(path1, path2);
         const firstVector = vectors[0];
