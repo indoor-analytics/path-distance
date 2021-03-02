@@ -1,4 +1,4 @@
-import {pathDistance} from "../src/main";
+import {pathDistance} from "../main";
 import {path1, path2} from "./test.features";
 import {lineString, FeatureCollection, featureCollection} from "@turf/helpers";
 import { expect } from "chai";

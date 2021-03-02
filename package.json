@@ -2,8 +2,8 @@
   "name": "@indoor-analytics/path-distance",
   "version": "0.0.1",
   "description": "Computes distance between two paths",
-  "main": "src/main.js",
-  "types": "src/main.d.ts",
+  "main": "main.js",
+  "types": "main.d.ts",
   "scripts": {
     "build": "npx tsc",
     "prepare": "npm run build",

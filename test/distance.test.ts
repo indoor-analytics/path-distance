@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import {path1, path2} from "./test.features";
-import {pathDistance} from "../src/distance/distance";
+import {pathDistance} from "../src/distance";
 import {lineString} from "@turf/helpers";
 import {lineDistance} from "@turf/turf";
 import assert = require("assert");
