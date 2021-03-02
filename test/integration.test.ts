@@ -10,7 +10,7 @@ function printCollectionToFile (collection: FeatureCollection): void {
 
 // You can use http://geojson.io/ to visualize data exported in node.json
 describe ('Integration test', () => {
-    it ('should produce some vectors', () => {
+    it ('should be able to use exposed method', () => {
         const vectors = pathDistance(path1, path2);
         const vectorsLines = vectors.map((vector) =>
             lineString([vector.projectedPoint, vector.acquiredPoint], {"stroke": "#ff0000"}));
