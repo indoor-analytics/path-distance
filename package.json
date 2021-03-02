@@ -10,7 +10,8 @@
     "test": "npm run build && mocha -r ts-node/register test/*.test.ts"
   },
   "author": "Rémy Raes",
-  "license": "ISC",
+  "repository": "git://github.com/indoor-analytics/path-distance.git",
+  "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
