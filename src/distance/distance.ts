@@ -89,6 +89,6 @@ function createVectorFrom (
         pos1.geometry!.coordinates,
         pos2.geometry!.coordinates,
         distance(pos1, pos2, {units: 'meters'}),
-        coveredDistance/1000
+        coveredDistance
     );
 }

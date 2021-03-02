@@ -9,8 +9,8 @@
  */
 export default class ErrorVector {
     public index: number;               // index of the acquired position
-    public distance: number;            // distance between an acquired location and its projection on the reference path
-    public projectedDistance: number;   // distance from the origin of the reference path to the projected location
+    public distance: number;            // distance in meters between an acquired location and its projection on the reference path
+    public projectedDistance: number;   // distance in meters from the origin of the reference path to the projected location
 
     public acquiredPoint: number[];     // location reported by the localisation system
     public projectedPoint: number[];    // projection of the acquired location on the reference path
