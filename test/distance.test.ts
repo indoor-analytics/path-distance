@@ -52,7 +52,7 @@ describe ('distance', () => {
         const vectors = pathDistance(path1, path2);
         const lastVector = vectors[vectors.length-1];
 
-        expect(lastVector.projectedDistance).to.equal(lineDistance(path1));
+        expect(lastVector.projectedDistance).to.be.approximately(lineDistance(path1), 0.000000000000001);
         expect(lastVector.projectedPoint).to.deep.equal(path1.geometry!.coordinates[path1.geometry!.coordinates.length-1]);
     });
 
