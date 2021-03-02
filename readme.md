@@ -4,6 +4,10 @@ Computes distance between two paths by projecting positions of the second (acqui
 onto the first (reference) one.
 This allows to compare paths with different location counts.
 
+| ![Distance example](docs/errordistance.png) |
+|:--:|
+| *comparing two paths* |
+
 ## Distance algorithm formalization
 
 For each acquired path location, we create a projection on the reference path; first path location
