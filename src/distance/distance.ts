@@ -38,7 +38,7 @@ export function pathDistance (
 
         // projection of the point on the reference path
         const interpolationDistance = coveredDistance*delta;
-        const newPoint = along(referencePath, interpolationDistance);
+        const newPoint = along(referencePath, interpolationDistance, {units: 'meters'});
         vectors.push(
             createVectorFrom(point(currentPoint), newPoint, i, interpolationDistance)
         );
