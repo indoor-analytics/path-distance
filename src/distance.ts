@@ -1,6 +1,6 @@
 import {Feature, LineString, Point, point} from "@turf/helpers";
-import ErrorVector from "./ErrorVector";
 import {along, distance, lineDistance} from "@turf/turf";
+import {ErrorVector} from "@indoor-analytics/entities";
 
 /**
  * Compares a path to a reference path by projecting its positions on the reference path.

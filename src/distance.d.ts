@@ -1,5 +1,5 @@
 import { Feature, LineString } from "@turf/helpers";
-import ErrorVector from "./ErrorVector";
+import { ErrorVector } from "@indoor-analytics/entities";
 /**
  * Compares a path to a reference path by projecting its positions on the reference path.
  * More details about the algorithm in the readme.
