@@ -1,6 +1,6 @@
 {
   "name": "@indoor-analytics/path-distance",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Computes distance between two paths",
   "main": "main.js",
   "types": "main.d.ts",
@@ -23,7 +23,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@indoor-analytics/entities": "0.0.3",
+    "@indoor-analytics/entities": "^0.0.4",
     "@indoor-analytics/path-distance": "^0.0.1",
     "@turf/turf": "^5.1.6",
     "geojson": "^0.5.0"
