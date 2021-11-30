@@ -18,6 +18,8 @@ export function distanceWithTime (
         throw new RangeError('Timestamps array must not be empty.');
     if (checkpointsTimestamps.length !== referencePath.geometry?.coordinates.length)
         throw new RangeError('Timestamps array length must match reference path locations count.');
+    if (comparedPath.properties?.locationsTimestamps.length !== comparedPath.geometry?.coordinates.length)
+        throw new RangeError('Compared path timestamps length must match its locations count.');
 
     return [];
 }
