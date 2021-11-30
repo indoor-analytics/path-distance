@@ -17,5 +17,5 @@ it ('should be more accurate than pathDistance method with run having many locat
     timeVectors.forEach(v => total += v.distance);
     const timeVectorsAverageError = total/timeVectors.length;
 
-    expect(timeVectorsAverageError).to.be.greaterThan(classicVectorsAverageError);
+    expect(timeVectorsAverageError).to.be.below(classicVectorsAverageError);
 });
