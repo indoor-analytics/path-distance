@@ -8,4 +8,6 @@ import { Feature, LineString } from "@turf/helpers";
  * @param comparedPath path to compare to ground truth
  * @param checkpointsTimestamps times (in milliseconds since Unix Epoch) when reference path checkpoints have been reached
  */
-export declare function distanceWithTime(referencePath: Feature<LineString>, comparedPath: Feature<LineString>, checkpointsTimestamps: number[]): ErrorVector[];
+export declare function distanceWithTime(referencePath: Feature<LineString>, comparedPath: Feature<LineString, {
+    locationsTimestamps: number[];
+}>, checkpointsTimestamps: number[]): ErrorVector[];

@@ -11,7 +11,7 @@ import {Feature, LineString} from "@turf/helpers";
  */
 export function distanceWithTime (
     referencePath: Feature<LineString>,
-    comparedPath: Feature<LineString>,
+    comparedPath: Feature<LineString, {locationsTimestamps: number[]}>,
     checkpointsTimestamps: number[]
 ): ErrorVector[] {
     if (checkpointsTimestamps.length === 0)
