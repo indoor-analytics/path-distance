@@ -14,5 +14,7 @@ export function distanceWithTime (
     comparedPath: Feature<LineString>,
     checkpointsTimestamps: number[]
 ): ErrorVector[] {
+    if (checkpointsTimestamps.length === 0)
+        throw new RangeError('Timestamps array must not be empty.');
     return [];
 }
