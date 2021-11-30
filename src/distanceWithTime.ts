@@ -16,5 +16,8 @@ export function distanceWithTime (
 ): ErrorVector[] {
     if (checkpointsTimestamps.length === 0)
         throw new RangeError('Timestamps array must not be empty.');
+    if (checkpointsTimestamps.length !== referencePath.geometry?.coordinates.length)
+        throw new RangeError('Timestamps array length must match reference path locations count.');
+
     return [];
 }
