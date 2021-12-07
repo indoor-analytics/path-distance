@@ -33,5 +33,8 @@ it ('should be more accurate than pathDistance method with run having many locat
 
     const timeVectorsLines = timeVectors.map((vector) =>
         lineString([vector.projectedPoint, vector.acquiredPoint], {"stroke": "#ff0000"}));
-    printCollectionToFile(featureCollection([referencePath, comparedPath, ...timeVectorsLines]));
+    printCollectionToFile(featureCollection([referencePath, comparedPath, ...timeVectorsLines]), 'timeVectors');
+    const classicVectorsLines = classicVectors.map((vector) =>
+        lineString([vector.projectedPoint, vector.acquiredPoint], {"stroke": "#ff0000"}));
+    printCollectionToFile(featureCollection([referencePath, comparedPath, ...classicVectorsLines]), 'classicVectors');
 });
