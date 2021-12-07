@@ -5,7 +5,7 @@ import {
     getRailwayReference,
     getTimedRun,
     checkpointsTimestamps,
-    getRailwayReferenceWithDoubleStartingPoint, getCheckpointsWithDoubleFirstTime
+    getRailwayReferenceWithDoubleStartingPoint, getCheckpointsWithDoubleSecondTime
 } from "./test.features";
 
 it ('should be more accurate than pathDistance method with run having many locations at the beginning of reference path', () => {
@@ -18,7 +18,7 @@ it ('should be more accurate than pathDistance method with run having many locat
     const classicVectorsAverageError = total/classicVectors.length;
 
     total = 0;
-    const timeVectors = distanceWithTime(referencePath, comparedPath, getCheckpointsWithDoubleFirstTime());
+    const timeVectors = distanceWithTime(referencePath, comparedPath, getCheckpointsWithDoubleSecondTime());
     timeVectors.forEach(v => total += v.distance);
     const timeVectorsAverageError = total/timeVectors.length;
 

@@ -135,9 +135,9 @@ export const checkpointsTimestamps = [
     1637743459863
 ];
 
-export const getCheckpointsWithDoubleFirstTime = () => {
+export const getCheckpointsWithDoubleSecondTime = () => {
     const checkpoints = JSON.parse(JSON.stringify(checkpointsTimestamps));
-    checkpoints.unshift(checkpoints[0]);
+    checkpoints.splice(1, 0, checkpoints[1]);
     return checkpoints;
 };
 
