@@ -2,12 +2,17 @@ import { pathDistance } from "@indoor-analytics/path-distance";
 import { expect } from "chai";
 import { distanceWithTime } from "../src/distanceWithTime";
 import {
-    getRailwayReference,
     getTimedRun,
-    checkpointsTimestamps,
-    getRailwayReferenceWithDoubleStartingPoint, getCheckpointsWithDoubleSecondTime
+    getRailwayReferenceWithDoubleStartingPoint, getCheckpointsWithDoubleSecondTime, path1, path2
 } from "./test.features";
+import {FeatureCollection, featureCollection, lineString} from "@turf/helpers";
+import fs from "fs";
 
+function printCollectionToFile (collection: FeatureCollection, filename = 'node'): void {
+    fs.writeFileSync(`${filename}.json`, JSON.stringify(collection));
+}
+
+// You can use http://geojson.io/ to visualize data exported in node.json
 it ('should be more accurate than pathDistance method with run having many locations at the beginning of reference path', () => {
     const referencePath = getRailwayReferenceWithDoubleStartingPoint();
     const comparedPath = getTimedRun();
@@ -23,4 +28,10 @@ it ('should be more accurate than pathDistance method with run having many locat
     const timeVectorsAverageError = total/timeVectors.length;
 
     expect(timeVectorsAverageError).to.be.below(classicVectorsAverageError);
+    console.log('classic distance:', classicVectorsAverageError);
+    console.log('timed distance:', timeVectorsAverageError);
+
+    const timeVectorsLines = timeVectors.map((vector) =>
+        lineString([vector.projectedPoint, vector.acquiredPoint], {"stroke": "#ff0000"}));
+    printCollectionToFile(featureCollection([referencePath, comparedPath, ...timeVectorsLines]));
 });
