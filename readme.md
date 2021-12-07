@@ -4,9 +4,9 @@ Computes distance between two paths by projecting positions of the second (acqui
 onto the first (reference) one.
 This allows to compare paths with different location counts.
 
-| ![Distance example](docs/errordistance.png) |
-|:--:|
-| *comparing two paths* |
+| ![Classic distance example](docs/classicDistanceExample.png) | ![Timed distance example](docs/timedDistanceExample.png) |
+|:--:|:--:|
+| *comparing two paths* | *comparing same paths with time information taken into account* |
 
 ## How to use
 
