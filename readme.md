@@ -25,7 +25,9 @@ Import the function in your code:
 import {pathDistance} from '@indoor-analytics/path-distance';
 ```
 
-## Distance algorithm formalization
+## Algorithms 
+
+### Classic distance
 
 For each acquired path location, we create a projection on the reference path; first path location
 will always match first reference path, the same for the last location.
@@ -35,3 +37,10 @@ A projected position is obtained by:
 2. computing the ratio position distance / path length;
 3. computing the equivalent distance regarding the reference path;
 4. projecting the position on the reference path.
+
+### Timed distance
+
+For each path reference path segment (made by two consecutive path points):
+1. get both points' timestamps;
+2. get compared path segment whose locations have been captured while walking current reference path segment;
+3. compare reference path segment and compared path segment using classic distance algorithm 
