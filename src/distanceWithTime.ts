@@ -1,5 +1,7 @@
 import {ErrorVector} from "@indoor-analytics/entities";
-import {Feature, LineString} from "@turf/helpers";
+import {Feature, lineString, LineString} from "@turf/helpers";
+import {Position} from "@turf/turf";
+import {pathDistance} from "./distance";
 
 /**
  * Compares a path to another by projecting its positions on the reference path.
@@ -21,5 +23,25 @@ export function distanceWithTime (
     if (comparedPath.properties?.locationsTimestamps.length !== comparedPath.geometry?.coordinates.length)
         throw new RangeError('Compared path timestamps length must match its locations count.');
 
-    return [];
+    const vectors: ErrorVector[] = [];
+
+    for (let i=0; i<referencePath.geometry.coordinates.length-1; i++) {
+        const start: Position = referencePath.geometry.coordinates[i];
+        const startTime = checkpointsTimestamps[i];
+        const end: Position = referencePath.geometry.coordinates[i+1];
+        const endTime = checkpointsTimestamps[i+1];
+
+        const referencePathSegment = lineString([start, end]);
+
+        const comparedPathSegmentCoordinates = comparedPath.geometry!.coordinates.filter((pos, index) => {
+            const posTime = comparedPath.properties!.locationsTimestamps[index];
+            return startTime <= posTime && posTime <= endTime;
+        });
+        if (comparedPathSegmentCoordinates.length <= 1) continue;
+        const comparedPathSegment = lineString(comparedPathSegmentCoordinates);
+
+        vectors.push(...pathDistance(referencePathSegment, comparedPathSegment));
+    }
+
+    return vectors;
 }
