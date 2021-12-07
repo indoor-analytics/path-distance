@@ -135,6 +135,12 @@ export const checkpointsTimestamps = [
     1637743459863
 ];
 
+export const getCheckpointsWithDoubleFirstTime = () => {
+    const checkpoints = JSON.parse(JSON.stringify(checkpointsTimestamps));
+    checkpoints.unshift(checkpoints[0]);
+    return checkpoints;
+};
+
 export const getRailwayReference = () => lineString([
     [
         3.0710312551725565,
@@ -185,6 +191,12 @@ export const getRailwayReference = () => lineString([
         50.63684124415866
     ]
 ]);
+
+export const getRailwayReferenceWithDoubleStartingPoint = () => {
+    const line = getRailwayReference();
+    line.geometry!.coordinates.unshift(line.geometry!.coordinates[0]);
+    return line;
+};
 
 export const getTimedRun = () => lineString(
     [
