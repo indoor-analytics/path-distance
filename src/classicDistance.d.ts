@@ -7,4 +7,4 @@ import { ErrorVector } from "@indoor-analytics/entities";
  * @param referencePath
  * @param comparedPath
  */
-export declare function pathDistance(referencePath: Feature<LineString>, comparedPath: Feature<LineString>): ErrorVector[];
+export declare function classicPathDistance(referencePath: Feature<LineString>, comparedPath: Feature<LineString>): ErrorVector[];

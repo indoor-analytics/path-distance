@@ -9,7 +9,7 @@ import {ErrorVector} from "@indoor-analytics/entities";
  * @param referencePath
  * @param comparedPath
  */
-export function pathDistance (
+export function classicPathDistance (
     referencePath: Feature<LineString>,
     comparedPath: Feature<LineString>
 ): ErrorVector[] {

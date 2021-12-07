@@ -1,6 +1,6 @@
 {
   "name": "@indoor-analytics/path-distance",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Computes distance between two paths",
   "main": "main.js",
   "types": "main.d.ts",
