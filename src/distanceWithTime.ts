@@ -1,7 +1,7 @@
 import {ErrorVector} from "@indoor-analytics/entities";
 import {Feature, lineString, LineString} from "@turf/helpers";
 import {Position} from "@turf/turf";
-import {pathDistance} from "./distance";
+import {classicPathDistance} from "./classicDistance";
 
 /**
  * Compares a path to another by projecting its positions on the reference path.
@@ -40,7 +40,7 @@ export function distanceWithTime (
         if (comparedPathSegmentCoordinates.length <= 1) continue;
         const comparedPathSegment = lineString(comparedPathSegmentCoordinates);
 
-        vectors.push(...pathDistance(referencePathSegment, comparedPathSegment));
+        vectors.push(...classicPathDistance(referencePathSegment, comparedPathSegment));
     }
 
     return vectors;

@@ -1,2 +1,2 @@
-import {pathDistance} from "./src/distance";
-export {pathDistance};
+import {classicPathDistance} from "./src/classicDistance";
+export {classicPathDistance};
