@@ -35,5 +35,14 @@ describe ('Integration test', () => {
         const classicVectorsAverage = classicVectors.map(e => e.distance).reduce((a, b) => a+b);
         const timedVectorsAverage = timedVectors.map(e => e.distance).reduce((a, b) => a+b);
         expect(classicVectorsAverage).to.be.greaterThan(timedVectorsAverage);
-    })
+    });
+
+    it('should return same result if compared path have no location timestamps', () => {
+        const referencePath = getRailwayReferenceWithDoubleStartingPoint();
+        const comparedPath = path1;
+
+        const classicVectors = pathDistance(referencePath, comparedPath);
+        const timedVectors = pathDistance(referencePath, comparedPath, getCheckpointsWithDoubleSecondTime());
+        expect(classicVectors).to.deep.equal(timedVectors);
+    });
 });
