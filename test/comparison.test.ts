@@ -48,3 +48,13 @@ it ('should return same vectors count', () => {
 
     expect(classicVectors.length).to.equal(timeVectors.length);
 });
+
+it ('should return vectors that end on same position', () => {
+    const referencePath = getRailwayReferenceWithDoubleStartingPoint();
+    const comparedPath = getTimedRun();
+
+    const classicVectors = pathDistance(referencePath, comparedPath);
+    const timeVectors = distanceWithTime(referencePath, comparedPath, getCheckpointsWithDoubleSecondTime());
+
+    expect(classicVectors.pop()!.projectedDistance).to.equal(timeVectors.pop()!.projectedDistance);
+});
