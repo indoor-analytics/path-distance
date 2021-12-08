@@ -38,3 +38,13 @@ it ('should be more accurate than pathDistance method with run having many locat
         lineString([vector.projectedPoint, vector.acquiredPoint], {"stroke": "#ff0000"}));
     printCollectionToFile(featureCollection([referencePath, comparedPath, ...classicVectorsLines]), 'classicVectors');
 });
+
+it ('should return same vectors count', () => {
+    const referencePath = getRailwayReferenceWithDoubleStartingPoint();
+    const comparedPath = getTimedRun();
+
+    const classicVectors = pathDistance(referencePath, comparedPath);
+    const timeVectors = distanceWithTime(referencePath, comparedPath, getCheckpointsWithDoubleSecondTime());
+
+    expect(classicVectors.length).to.equal(timeVectors.length);
+});
