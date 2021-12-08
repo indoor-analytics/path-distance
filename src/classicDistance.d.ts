@@ -6,5 +6,6 @@ import { ErrorVector } from "@indoor-analytics/entities";
  *
  * @param referencePath
  * @param comparedPath
+ * @param basisReferencePathLength length to add to current reference path length (used by time algorithm)
  */
-export declare function classicPathDistance(referencePath: Feature<LineString>, comparedPath: Feature<LineString>): ErrorVector[];
+export declare function classicPathDistance(referencePath: Feature<LineString>, comparedPath: Feature<LineString>, basisReferencePathLength?: number): ErrorVector[];

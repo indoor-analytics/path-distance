@@ -1,6 +1,6 @@
 import {ErrorVector} from "@indoor-analytics/entities";
 import {Feature, lineString, LineString} from "@turf/helpers";
-import {Position} from "@turf/turf";
+import {lineDistance, Position} from "@turf/turf";
 import {classicPathDistance} from "./classicDistance";
 
 /**
@@ -24,6 +24,7 @@ export function distanceWithTime (
         throw new RangeError('Compared path timestamps length must match its locations count.');
 
     const vectors: ErrorVector[] = [];
+    let currentReferencePathLength = 0;
 
     for (let i=0; i<referencePath.geometry.coordinates.length-1; i++) {
         const start: Position = referencePath.geometry.coordinates[i];
@@ -37,10 +38,12 @@ export function distanceWithTime (
             const posTime = comparedPath.properties!.locationsTimestamps[index];
             return startTime <= posTime && posTime <= endTime;
         });
-        if (comparedPathSegmentCoordinates.length <= 1) continue;
-        const comparedPathSegment = lineString(comparedPathSegmentCoordinates);
 
-        vectors.push(...classicPathDistance(referencePathSegment, comparedPathSegment));
+        if (comparedPathSegmentCoordinates.length > 1) {
+            const comparedPathSegment = lineString(comparedPathSegmentCoordinates);
+            vectors.push(...classicPathDistance(referencePathSegment, comparedPathSegment, currentReferencePathLength));
+        }
+        currentReferencePathLength += lineDistance(referencePathSegment, {units: 'meters'});
     }
 
     return vectors;

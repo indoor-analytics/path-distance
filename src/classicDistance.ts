@@ -8,10 +8,12 @@ import {ErrorVector} from "@indoor-analytics/entities";
  *
  * @param referencePath
  * @param comparedPath
+ * @param basisReferencePathLength length to add to current reference path length (used by time algorithm)
  */
 export function classicPathDistance (
     referencePath: Feature<LineString>,
-    comparedPath: Feature<LineString>
+    comparedPath: Feature<LineString>,
+    basisReferencePathLength: number = 0
 ): ErrorVector[] {
 
     const vectors: ErrorVector[] = [];
@@ -23,7 +25,7 @@ export function classicPathDistance (
     const startPoint = acquiredCoordinates[0];
     const projectedStartPoint = referencePath.geometry!.coordinates[0];
     vectors.push(
-        createVectorFrom(point(startPoint), point(projectedStartPoint), index, 0)
+        createVectorFrom(point(startPoint), point(projectedStartPoint), index, basisReferencePathLength)
     );
 
     let coveredDistance: number = 0;
@@ -40,7 +42,7 @@ export function classicPathDistance (
         const interpolationDistance = coveredDistance*delta;
         const newPoint = along(referencePath, interpolationDistance, {units: 'meters'});
         vectors.push(
-            createVectorFrom(point(currentPoint), newPoint, i, interpolationDistance)
+            createVectorFrom(point(currentPoint), newPoint, i, interpolationDistance + basisReferencePathLength)
         );
     }
 
@@ -48,7 +50,11 @@ export function classicPathDistance (
     const endPoint = acquiredCoordinates[acquiredCoordinates.length-1];
     const projectedEndPoint = referencePath.geometry!.coordinates[referencePath.geometry!.coordinates.length-1];
     vectors.push(
-        createVectorFrom(point(endPoint), point(projectedEndPoint), length, lineDistance(referencePath, {units: 'meters'}))
+        createVectorFrom(point(endPoint),
+            point(projectedEndPoint),
+            length,
+            lineDistance(referencePath, {units: 'meters'}) + basisReferencePathLength
+        )
     );
 
     return vectors;
