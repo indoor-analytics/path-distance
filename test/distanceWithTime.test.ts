@@ -28,7 +28,7 @@ describe('distanceWithTime', () => {
         expect(getDistance).to.throw(RangeError, 'Compared path timestamps length must match its locations count.');
     });
 
-    it('should get distance', () => {
+    it('should get distance from a run with a segment length equaling 0', () => {
         const ref = getReversedRailwayReference();
         const runWithTimestamps = getReversedTimedRun();
         const refTimestamps = [
