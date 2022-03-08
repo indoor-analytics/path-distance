@@ -63,6 +63,7 @@ export function classicPathDistance (
 
 /**
  * Returns distance delta between two paths.
+ * If acquired path length equals 0, it returns 0.
  *
  * @param referencePath
  * @param acquiredPath
@@ -71,7 +72,11 @@ function getLineDistanceDelta (
     referencePath: Feature<LineString>,
     acquiredPath: Feature<LineString>
 ): number {
-    return lineDistance(referencePath) / lineDistance(acquiredPath);
+    const refDistance = lineDistance(referencePath);
+    const acqDistance = lineDistance(acquiredPath);
+    return acqDistance === 0
+        ? 0
+        : refDistance / acqDistance;
 }
 
 
